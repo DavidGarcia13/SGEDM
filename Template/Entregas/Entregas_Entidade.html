@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Entregas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Estilos/Entidades.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="header">
+            <h1>Entregas Incluir</h1>
+            <div>
+                <button class="btn btn-secondary" onclick="fecharEntregas()">Fechar</button>
+                <button onclick="CadastrarEntrega()" class="btn btn-secondary" >Confirmar</button>
+            </div>
+        </header>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-dados-entrega-tab" data-toggle="tab" href="#nav-dados-entrega" role="tab" aria-controls="nav-dados-entrega" aria-selected="true">Dados da Entrega</a>
+                <a class="nav-item nav-link" id="nav-entrega-tab" data-toggle="tab" href="#nav-entrega" role="tab" aria-controls="nav-entrega" aria-selected="false">Entrega</a>
+                <a class="nav-item nav-link" id="nav-assinatura-tab" data-toggle="tab" href="#nav-assinatura" role="tab" aria-controls="nav-assinatura" aria-selected="false">Assinatura</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-dados-entrega" role="tabpanel" aria-labelledby="nav-dados-entrega-tab">
+                <form class="p-3">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="documento">Documento</label>
+                            <input type="text" class="form-control" id="documento" placeholder="Documento">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="vendedor">Vendedor</label>
+                            <input type="text" class="form-control" id="vendedor" placeholder="Vendedor">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="data">Data</label>
+                            <input type="date" class="form-control" id="data">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="hora">Hora</label>
+                            <input type="time" class="form-control" id="hora">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="valor">Valor</label>
+                            <input type="number" class="form-control" id="valor" placeholder="Valor" oninput="calculaTroco()">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="valor-recebido">Valor Recebido</label>
+                            <input type="number" class="form-control" id="valor-recebido" placeholder="Valor Recebido" oninput="calculaTroco()">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="troco">Troco</label>
+                            <input type="number" class="form-control" id="troco" placeholder="Troco" >
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="forma-pag">Forma de Pagamento</label>
+                            <input type="text" class="form-control" id="forma-pag" placeholder="Forma de Pagamento">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="obs">Observações</label>
+                            <input type="text" class="form-control" id="obs" placeholder="Observações">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="tipo-entrega">Tipo de Entrega</label>
+                            <input type="text" class="form-control" id="tipo-entrega" placeholder="Tipo de Entrega">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="filial">Filial</label>
+                            <input type="text" class="form-control" id="filial" placeholder="Filial">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="nav-entrega" role="tabpanel" aria-labelledby="nav-entrega-tab">
+                <form class="p-3">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nome-entregador">Nome Entregador</label>
+                            <input type="text" class="form-control" id="nome-entregador" placeholder="Nome Entregador">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="data-entrega">Data Entrega</label>
+                            <input type="date" class="form-control" id="data-entrega">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="hora-entrega">Hora Entrega</label>
+                            <input type="time" class="form-control" id="hora-entrega">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="observacao">Observação</label>
+                            <input type="text" class="form-control" id="observacao" placeholder="Observação">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="status">Status</label>
+                            <input type="text" class="form-control" id="status" placeholder="Status">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inicio-entrega">Início Entrega</label>
+                            <input type="time" class="form-control" id="inicio-entrega">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="data-inicio">Data Início</label>
+                            <input type="date" class="form-control" id="data-inicio">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="latitude">Latitude</label>
+                            <input type="text" class="form-control" id="latitude" placeholder="latitude">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="longitude">Longitude</label>
+                            <input type="text" class="form-control" id="longitude" placeholder="longitude">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="nav-assinatura" role="tabpanel" aria-labelledby="nav-assinatura-tab">
+                <form class="p-3">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="data-assinatura">Data Assinatura</label>
+                            <input type="date" class="form-control" id="data-assinatura">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="hora-assinatura">Hora Assinatura</label>
+                            <input type="time" class="form-control" id="hora-assinatura">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="caixa-assinatura">Caixa Assinatura</label>
+                            <input type="text" class="form-control" id="caixa-assinatura" placeholder="Caixa Assinatura">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../../JS/Entregas/Entregas_Entidade.js"></script>
+    <script src="../../JS/Index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+body, html {
+    height: 100%;
+    background: 
+        linear-gradient(to bottom, #343a40, rgb(64, 166, 152)) no-repeat, /* Gradiente por cima */
+        url("../Static/Fundo.jpg") no-repeat; /* Imagem de fundo por baixo */
+        background-size: cover;
+        position: relative;
+}
+
+img {
+    max-width: 100%; /* A largura máxima da imagem será 100% do seu contêiner */
+    height: auto; /* A altura se ajusta automaticamente para manter a proporção */
+    display: block; /* Remove o espaçamento inferior indesejado */
+}
+
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-box {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-login {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #6c757d;
+}
+.forgot-password:hover {
+    color: #343a40;
+}

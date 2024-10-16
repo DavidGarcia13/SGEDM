@@ -1,0 +1,189 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.form-check {
+    padding-left: 1.5rem; /* Ajuste para mover o checkbox para a direita */
+}
+
+img {
+    max-width: 100%; /* A largura máxima da imagem será 100% do seu contêiner */
+    height: auto; /* A altura se ajusta automaticamente para manter a proporção */
+    display: block; /* Remove o espaçamento inferior indesejado */
+}
+
+.wrapper {
+    display: flex;
+}
+
+.container-fluid {
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease;
+    margin-left: 0; /* Inicialmente sem margem */
+}
+
+.header { /*Titulo da rotina, Nome do usuario, Data e hora*/
+    display: flex;
+    justify-content: space-between; /* Espaça os itens, um de cada lado */
+    align-items: center; /* Alinha verticalmente */
+    padding: 10px 25px;
+    background-color: #f8f9fa;
+}
+
+.user-info p { /*Informações do usuario, Data e hora*/
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Aplica a fonte Roboto */
+    font-weight: 400; /* Peso normal para o texto */
+    font-size: 16px; /* Ajuste do tamanho da fonte */
+}
+
+.user-info p {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Aplica a fonte Roboto */
+    font-weight: 400; /* Peso normal para o texto */
+    font-size: 16px; /* Ajuste do tamanho da fonte */
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    border: 1px solid rgb(64, 166, 152);
+}
+
+.controls .dropdown_filter { /* DIV do Filtro */
+    /* Mantém a dropdown_filter no canto direito */
+    border-left: 1px solid rgb(64, 166, 152);
+    padding: 20px 40px 20px 40px;
+}
+
+.controls .btn {
+    padding: 5px 40px 5px 40px;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    margin-right: 10px;
+    flex-shrink: 1; /* Permite que encolham, mantendo a proporção */
+}
+
+#dropdownFilterButton {
+    padding: 5px 5px 5px 5px;
+    margin: 0;
+}
+
+#Inputfind {
+    padding: 5px 1px 5px 1px;
+}
+
+.grid-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.table-scroll {
+    max-height:  70vh; /* Defina a altura máxima desejada */
+    overflow-y: auto;  /* Ativa a rolagem apenas no eixo Y */
+    width: 100%;
+}
+
+.table-scroll thead th {
+    position: sticky;
+    top: 0;
+    background-color: #000;
+    color: #fff;
+    z-index: 2; /* Garante que o cabeçalho fique acima do conteúdo */
+}
+/*Estilo Menu Lateral*/
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #343a40;
+    padding-top: 20px;
+    transition: width 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar a {
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar .logo {
+    padding: 10px 15px;
+    font-size: 25px;
+    color: white;
+    text-align: center;
+}
+
+.sidebar .folder {
+    font-size: 18px;
+    margin-left: 15px;
+    margin-top: 10px;
+    color: #bbbbbb;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sidebar .sub-menu {
+    margin-left: 30px;
+    display: none;
+}
+
+.sidebar .sub-menu a {
+    font-size: 16px;
+    color: #dddddd;
+}
+.folder.active + .sub-menu {
+    display: block;
+}
+
+/* Estilos para o botão de alternância */
+.menu-toggle {
+    position: absolute;
+    top: 15px;
+    left: 260px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: left 0.3s;
+}
+
+/* Quando a sidebar estiver escondida */
+.sidebar-hidden .sidebar {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.sidebar-hidden .sidebar a,
+.sidebar-hidden .sidebar .folder {
+    display: none;
+}
+
+.sidebar-hidden .menu-toggle {
+    left: 10px;
+}
+
+.sidebar-hidden .container-fluid {
+    width: 100%; /* Quando o sidebar está retraído, o container-fluid ocupa toda a largura */
+}
+/* Movendo apenas a div 'container-fluid' */
+.sidebar-expanded {
+    margin-left: 250px; /* Empurra a div container-fluid para a direita */
+}
+
+.sidebar-expanded .menu-toggle {
+    left: 260px; /* Ajusta o botão de alternância conforme o menu se expande */
+}
+
+tbody tr.selected {
+    background-color: rgb(64, 166, 152) !important; /* Cor de fundo para a linha selecionada  Eu uso o Importante para sobrepor a classe do bootstrap*/
+}

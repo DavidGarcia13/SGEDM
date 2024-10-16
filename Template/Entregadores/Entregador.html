@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entregas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Estilos/Cadastros.css">
+</head>
+<body>
+    <div class="wrapper d-flex"></div>    
+        <!--Menu Lateral-->
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="../../Static/Logo2.jpg" alt="">
+            </div>
+            <div class="folder">Atualizações</div>
+            <div class="sub-menu">
+                <a href="../Entregas/Entregas.html">Entregas</a>
+                <a href="../Entregas_Avulsas/Entregas_Avulsas.html">Entregas Avulsas</a>
+                <a href="Entregador.html">Cadastro de Entregador</a>
+                <a href="../Vendedores/Vendedor.html">Cadastro de Vendedor</a>
+                <a href="#">Cadastro de Empresa</a>
+            </div>
+            <div class="folder">Relatórios</div>
+            <div class="sub-menu">
+                <a href="#">Entregas Analítico</a>
+                <a href="#">Entregas Sintético</a>
+                <a href="#">Entregas Avulsas</a>
+            </div>
+            <div class="folder">Miscelânea</div>
+            <div class="sub-menu">
+                <a href="#">Localizar Entregador</a>
+                <a href="#">Sobre nós</a>
+                <a href="#">Versão do Software</a>
+            </div>
+        </div>
+
+        <!-- Botão de alternância para a sidebar -->
+        <span class="menu-toggle" id="menuToggle">&#9776;</span>
+
+        <!-- FIM DO Menu Lateral-->
+        <div class="container-fluid sidebar-expanded">
+            <header class="header">
+                <h1>ENTREGADORES</h1>
+                <div class="user-info">
+                    <p id="welcome">Seja bem-vindo: Fulano</p>
+                    <p id="dateTime"> teste</p> <!-- Data e Hora irão aqui -->
+                </div>
+            </header>
+            <section class="controls d-flex">
+                <div class="d-flex">
+                    <button class="btn btn-secondary" onclick="redirecionarParaEntidade('entregador')" >Incluir</button>
+                    <button class="btn btn-secondary" onclick="visualizarEntregador()">Visualizar</button>
+                    <button class="btn btn-secondary" onclick="AlterarEntregador()">Alterar</button>
+                    <button class="btn btn-secondary">Excluir</button>
+                </div>
+                <div class="dropdown_filter d-flex align-items-center">
+                    <button class="btn_filter btn btn-primary dropdown-toggle" type="button" id="dropdownFilterButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        &#9776;
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownFilterButton">
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input filter-checkbox" type="checkbox" id="nome">
+                                <label class="form-check-label" for="nome">Nome do Entregador</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input filter-checkbox" type="checkbox" id="codigo">
+                                <label class="form-check-label" for="codigo">Código</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <input class="form-control ms-2 mt-2 mt-md-0" id="Inputfind" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                </div>
+            </section>
+
+            <section class="table-scroll table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Código</th>
+                            <th>Nome do Entregador</th>
+                            <th>Filial</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="entregadoresBody">
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script src="../../JS/index.js"></script>
+    <script src="../../JS/Compartilhados.js"></script>
+    <script src="../../JS/Entregadores/Entregador_Table.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
