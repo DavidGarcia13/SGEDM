@@ -180,6 +180,36 @@
         </div>
     </div>
 
+    <!-- Finalização da Entrega-->
+    <div class="modal fade" id="finalizarEntregaModal" tabindex="-1" aria-labelledby="finalizarEntregaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="finalizarEntregaModalLabel">Confirmação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="select-status-entrega">Selecione uma opção para finalizar a entrega:</label>
+                            <select id="select-status-entrega" class="form-control">
+                                <option value="">Selecione o status da entrega</option>
+                                <option value="entregue">Entregue</option>
+                                <option value="nao_entregue">Não Entregue</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-sim" onclick="finalizarEntrega()">Sim</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../../JS/Compartilhados.js"></script>
     <script src="../../JS/Index.js"></script>
     <script src="../../JS/Entregas/Entregas_Table.js"></script>

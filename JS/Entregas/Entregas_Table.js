@@ -157,6 +157,8 @@ async function visualizarEntrega() {
     window.location.href = `Entregas_View.html?id=${entregaId}`;
 }
 
+
+//----------------------------------------------Local da Entrega Maps-------------------------------------------------------------------------\\
 document.getElementById('abrirmaps').addEventListener('click', openModal)
 
 function openModal(){
@@ -178,9 +180,7 @@ function openGoogleMaps(latitude, longitude) {
     window.open(url, '_blank');
 }
 
-async function getCordenadas() {
-    let token = getTokenFromLocalStorage();
-    
+function getIdEntrega(){
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
         alert('Por favor, selecione uma linha para visualizar.');
@@ -191,8 +191,15 @@ async function getCordenadas() {
     if (!idEntrega) {
         alert('ID da Entrega não foi fornecido.');
         return;
+    }else{
+        return idEntrega;
     }
+}
 
+async function getCordenadas() {
+    let token = getTokenFromLocalStorage();
+    let idEntrega = getIdEntrega()
+    
     try {
         const response = await fetch(`${urlBackend()}/api/v1/entrega?idEntrega=${idEntrega}`, {
             method: 'GET',
@@ -221,5 +228,180 @@ async function getCordenadas() {
     }
 }
 
+//----------------------------------------------Atribuir Entregador-------------------------------------------------------------------------\\
+async function getEntregadores() {
+    let token = getTokenFromLocalStorage();
+    
+    if (!token){
+        console.log('Não foi possivel obter o Token')
+    }
+
+    const url = `${urlBackend()}/api/v1/entregador`;
+    const opcoes = {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+    };
+
+    try {
+        const response = await fetch(url, opcoes);
+
+        if (response.ok) {
+            const data = await response.json();
+
+            if (data && Array.isArray(data.body)) {
+                return data.body;
+            } else {
+                console.log('Formato inesperado de resposta:', data);
+                return [];
+            }
+        } else {
+            throw new Error('Erro ao buscar entregadores: ' + response.statusText);
+        }
+    } catch (error) {
+        
+        return [];
+    }
+}
+
+async function preencherComboEntregadores() {
+    // Pegando o combo select pelo ID
+    const selectEntregador = document.getElementById("select-entregador");
+
+    // Limpando as opções atuais (exceto a primeira)
+    selectEntregador.innerHTML = '<option value="">Selecione o Entregador</option>';
+
+    // Chama a função GetEntregadores e preenche o combo com as opções
+    const entregadores = await getEntregadores();
+
+    // Itera sobre os entregadores e cria um option para cada um
+    entregadores.forEach(entregador => {
+        const option = document.createElement("option");
+        option.value = entregador.idEntregador; // Valor será o ID do entregador
+        option.textContent = entregador.nome; // Texto visível será o nome do entregador
+        selectEntregador.appendChild(option);
+    });
+}
+
+document.getElementById('atribuirentregador').addEventListener('show.bs.modal', preencherComboEntregadores);
+document.getElementById('atribuirent').addEventListener('click', modalAtribuirEnt)
+
+function modalAtribuirEnt(){
+    let selectedRow = document.querySelector('#entregasBody .selected');
+    if (!selectedRow) {
+        alert('Por favor, selecione uma entrega para visualizar.');
+        return;
+    }
+    let status = selectedRow.cells[0].textContent;
+    if (status === 'Aberta') {
+        $('#atribuirentregador').modal('show');
+    }else{
+        alert('Apenas entregas em aberto podem ser atribuidas');
+    }
+} 
+
+async function atribuirEntregador() {
+    // Captura o valor do entregador selecionado no combo
+    const selectEntregador = document.getElementById("select-entregador");
+    const idEntregador = selectEntregador.options[selectEntregador.selectedIndex].value;
+    let idEntrega = getIdEntrega();
+    let token = getTokenFromLocalStorage();
+
+    // Verifica se um entregador foi selecionado
+    if (idEntregador === "") {
+        alert("Por favor, selecione um entregador.");
+        return;
+    }
+    
+    const url = `http://165.22.181.136:8080/api/v1/entrega/atribuir/${parseInt(idEntrega)}`;
+
+    const opcoes = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            id: parseInt(idEntregador)
+        }),
+        mode: 'cors',
+    };
+
+    try {
+        const response = await fetch(url, opcoes);
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.status);
+        }
+
+        window.location.href = 'Entregas.html'; 
+        
+    } catch (e) {
+        console.log('Deu erro: ' + e.message);
+        throw e; // Relança o erro para ser tratado onde a função for chamada
+    }
+   
+}
+
+// Associa a função ao botão "Confirmar" no modal
+document.getElementById("confirmar-entregador").addEventListener("click", atribuirEntregador);
+
+//----------------------------------------------Finalizar Entrega-------------------------------------------------------------------------\\
+
+async function finalizarEntrega() {
+    const selectStatusEntrega = document.getElementById("select-status-entrega");
+    let idEntrega = getIdEntrega();
+    let token = getTokenFromLocalStorage();
 
 
+    if (!selectStatusEntrega) {
+        console.error("Elemento select-status-entrega não encontrado.");
+        return;
+    }
+
+    const statusEntrega = selectStatusEntrega.value;
+
+    if (statusEntrega === "") {
+        alert("Por favor, selecione o status da entrega.");
+        return;
+    }
+    // Verifica se um entregador foi selecionado
+    if (idEntregador === "") {
+        alert("Por favor, selecione um entregador.");
+        return;
+    }
+    
+    const url = `http://165.22.181.136:8080/api/v1/entrega/finalizar/${parseInt(idEntrega)}`;
+
+    const opcoes = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            id: parseInt(idEntregador)
+        }),
+        mode: 'cors',
+    };
+
+    try {
+        const response = await fetch(url, opcoes);
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.status);
+        }
+
+        window.location.href = 'Entregas.html'; 
+        
+    } catch (e) {
+        console.log('Deu erro: ' + e.message);
+        throw e; // Relança o erro para ser tratado onde a função for chamada
+    }
+
+
+
+}
