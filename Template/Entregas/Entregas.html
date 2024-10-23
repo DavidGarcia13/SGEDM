@@ -53,7 +53,7 @@
                     <button class="btn btn-secondary" onclick="redirecionarParaEntidade('entregas')">Incluir</button>
                     <button class="btn btn-secondary" onclick="visualizarEntrega()">Visualizar</button>
                     <button class="btn btn-secondary">Alterar</button>
-                    <button class="btn btn-secondary">Excluir</button>
+                    <button class="btn btn-secondary" id="btnexcluir">Excluir</button>
                     <div class="dropdown_actions">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             Outras Ações
@@ -185,7 +185,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="finalizarEntregaModalLabel">Confirmação</h5>
+                    <h5 class="modal-title" id="finalizarEntregaModalLabel">Finalização Manual da Entrega</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -205,6 +205,56 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btn-sim" onclick="finalizarEntrega()">Sim</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Assinatura da Entrega-->
+     <div class="modal fade" id="assinaEntregaModal" tabindex="-1" aria-labelledby="assinaEntregaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assinaEntregaModalLabel"> Assinatura da Entrega</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="select-status-entrega">Confirma Assinatura da entrega?</label>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btn-sim" onclick="AssinarEntrega()">Sim</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancelamento da Entrega-->
+    <div class="modal fade" id="cancelEntregaModal" tabindex="-1" aria-labelledby="cancelEntregaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelEntregaModalLabel"> Cancelamento da Entrega</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="select-status-entrega">Confirma o cancelamento da entrega?</label>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btn-sim" onclick="CancelarEntrega()">Sim</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

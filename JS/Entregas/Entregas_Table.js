@@ -1,3 +1,12 @@
+function selecionarPrimeiraLinha() {
+    const tabela = document.querySelector('#entregasBody');
+    const primeiraLinha = tabela.querySelector('tr');
+    
+    if (primeiraLinha) {
+        primeiraLinha.classList.add('selected');
+    }
+}
+
 function configureCheckboxes() {
     const checkboxes = document.querySelectorAll('.filter-checkbox');
 
@@ -140,6 +149,7 @@ async function populateTableEntregas() {
             // Adiciona a linha ao body da tabela
             tabelaBody.appendChild(row);
         });
+        selecionarPrimeiraLinha()
 
     } catch (error) {
         console.error('Erro ao popular a tabela de entregas:', error);
@@ -316,7 +326,7 @@ async function atribuirEntregador() {
         return;
     }
     
-    const url = `http://165.22.181.136:8080/api/v1/entrega/atribuir/${parseInt(idEntrega)}`;
+    const url = `${urlBackend()}/api/v1/entrega/atribuir/${parseInt(idEntrega)}`;
 
     const opcoes = {
         method: 'PUT',
@@ -368,13 +378,8 @@ async function finalizarEntrega() {
         alert("Por favor, selecione o status da entrega.");
         return;
     }
-    // Verifica se um entregador foi selecionado
-    if (idEntregador === "") {
-        alert("Por favor, selecione um entregador.");
-        return;
-    }
-    
-    const url = `http://165.22.181.136:8080/api/v1/entrega/finalizar/${parseInt(idEntrega)}`;
+ 
+    const url = `${urlBackend()}/api/v1/entrega/finalizar/${parseInt(idEntrega)}`;
 
     const opcoes = {
         method: 'PUT',
@@ -382,9 +387,6 @@ async function finalizarEntrega() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({
-            id: parseInt(idEntregador)
-        }),
         mode: 'cors',
     };
 
@@ -402,6 +404,199 @@ async function finalizarEntrega() {
         throw e; // Relança o erro para ser tratado onde a função for chamada
     }
 
+}
 
+document.getElementById('finentrega').addEventListener('click', modalFinalizaEnt)
 
+function modalFinalizaEnt(){
+    let selectedRow = document.querySelector('#entregasBody .selected');
+    if (!selectedRow) {
+        alert('Por favor, selecione uma entrega para visualizar.');
+        return;
+    }
+    let status = selectedRow.cells[0].textContent;
+    if (status === 'Em rota') {
+        $('#finalizarEntregaModal').modal('show');
+    }else{
+        alert('Apenas entregas atribuidas podem ser finalizadas');
+    }
+} 
+
+//----------------------------------------------Assinatura da Entrega-------------------------------------------------------------------------\\
+
+document.getElementById('assentrega').addEventListener('click', modalAssinaEnt)
+
+function modalAssinaEnt(){
+    let selectedRow = document.querySelector('#entregasBody .selected');
+    if (!selectedRow) {
+        alert('Por favor, selecione uma entrega para visualizar.');
+        return;
+    }
+    let status = selectedRow.cells[0].textContent;
+    if (status === 'Finalizada' || status === 'Finalizada Manualmente') {
+        $('#assinaEntregaModal').modal('show');
+    } else {
+        alert('Apenas entregas atribuídas podem ser finalizadas');
+    }
+} 
+
+async function AssinarEntrega() {
+    const idVendedor = getIdNomeUser(2);
+    let idEntrega = getIdEntrega();
+    let token = getTokenFromLocalStorage();
+
+    // Verifica se um entregador foi selecionado
+    if (idVendedor === "") {
+        alert("Usuario não Autenticado!");
+        return;
+    }
+    
+    const url = `${urlBackend()}/api/v1/entrega/assinar/${parseInt(idEntrega)}`;
+
+    const opcoes = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            id: parseInt(idVendedor)
+        }),
+        mode: 'cors',
+    };
+
+    try {
+        const response = await fetch(url, opcoes);
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.status);
+        }
+
+        window.location.href = 'Entregas.html'; 
+        
+    } catch (e) {
+        console.log('Deu erro: ' + e.message);
+        throw e; // Relança o erro para ser tratado onde a função for chamada
+    }
+   
+}
+
+//----------------------------------------------Inativar Entrega-------------------------------------------------------------------------\\
+
+document.getElementById('btnexcluir').addEventListener('click', modalCancelEnt)
+
+function modalCancelEnt(){
+    let selectedRow = document.querySelector('#entregasBody .selected');
+    if (!selectedRow) {
+        alert('Por favor, selecione uma entrega para visualizar.');
+        return;
+    }
+    let status = selectedRow.cells[0].textContent;
+    if (status === 'Aberta' || status === 'Em rota') {
+        $('#cancelEntregaModal').modal('show');
+    } else {
+        alert('Apenas entregas não finalizadas podem ser excluidas');
+    }
+} 
+
+async function CancelarEntrega() {
+    let idEntrega = getIdEntrega();
+    let token = getTokenFromLocalStorage();
+
+    const url = `${urlBackend()}/api/v1/entrega/cancelar/${parseInt(idEntrega)}`;
+
+    const opcoes = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        mode: 'cors',
+    };
+
+    try {
+        const response = await fetch(url, opcoes);
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.status);
+        }
+
+        window.location.href = 'Entregas.html'; 
+        
+    } catch (e) {
+        console.log('Deu erro: ' + e.message);
+        throw e; // Relança o erro para ser tratado onde a função for chamada
+    }
+   
+}
+
+//-------------------------------------------------------FILTROS-------------------------------------------------------
+
+document.getElementById('Inputfind').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        filtrarTabela();
+    }
+});
+
+function filtrarTabela() {
+    const valorInput = document.getElementById('Inputfind').value.toLowerCase();
+    const filtros = document.querySelectorAll('.filter-checkbox:checked');
+    const tabela = document.getElementById('entregasBody');
+    const linhas = tabela.getElementsByTagName('tr');
+
+    if (filtros.length === 0 || !valorInput) {
+        alert('Selecione ao menos um filtro e preencha o campo de busca.');
+        return;
+    }
+
+    for (let i = 0; i < linhas.length; i++) {
+        let mostrarLinha = false;
+
+        filtros.forEach(filtro => {
+            const filtroId = filtro.id;
+            let colunaIndex = -1;
+
+            switch (filtroId) {
+                case 'status':
+                    colunaIndex = 0;
+                    break;
+                case 'codigo':
+                    colunaIndex = 1;
+                    break;
+                case 'documento':
+                    colunaIndex = 2;
+                    break;
+                case 'entregador':
+                    colunaIndex = 8;
+                    break;
+                case 'vendedor':
+                    colunaIndex = 9;
+                    break;
+            }
+
+            if (colunaIndex > -1) {
+                const conteudoColuna = linhas[i].getElementsByTagName('td')[colunaIndex].textContent.toLowerCase();
+                if (conteudoColuna.includes(valorInput)) {
+                    mostrarLinha = true;
+                }
+            }
+        });
+
+        linhas[i].style.display = mostrarLinha ? '' : 'none';
+    }
+}
+
+document.getElementById('Inputfind').addEventListener('input', function() {
+    if (this.value === '') {
+        removerFiltros();
+    }
+});
+
+function removerFiltros() {
+    const tabela = document.getElementById('entregasBody');
+    const linhas = tabela.getElementsByTagName('tr');
+
+    for (let i = 0; i < linhas.length; i++) {
+        linhas[i].style.display = ''; // Mostra todas as linhas
+    }
 }

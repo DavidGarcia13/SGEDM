@@ -53,6 +53,7 @@ async function carregarEntregas() {
             
             //Campos relacionados à assinatura e datas
             const dataass = new Date(data.body.dataAssinaturaEntrega);
+            document.getElementById('vendedor-assinatura').value = data.body.nomeUserAssinatura || '';
             document.getElementById('data-assinatura').value = dataass.toLocaleDateString('en-CA') || '';
             document.getElementById('hora-assinatura').value = dataass.toTimeString().split(' ')[0].substring(0, 5) || '';
             
