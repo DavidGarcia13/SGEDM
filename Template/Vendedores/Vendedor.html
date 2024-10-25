@@ -24,8 +24,8 @@
             </div>
             <div class="folder">Relatórios</div>
             <div class="sub-menu">
-                <a href="#">Entregas Analítico</a>
-                <a href="#">Entregas Sintético</a>
+                <a href="../Relatorios/Relatorio_Analitico.html">Entregas Analítico</a>
+                <a href="../Relatorios/Relatorio.html">Entregas Sintético</a>
                 <a href="#">Entregas Avulsas</a>
             </div>
             <div class="folder">Miscelânea</div>
@@ -44,15 +44,15 @@
             <header class="header">
                 <h1>VENDEDORES</h1>
                 <div class="user-info">
-                    <p>Seja bem-vindo: Fulano</p>
+                    <p id="welcome">Seja bem-vindo: Fulano</p>
                     <p id="dateTime"> teste</p> <!-- Data e Hora irão aqui -->
                 </div>
             </header>
             <section class="controls d-flex">
-                <div class="d-flex">
-                    <button class="btn btn-secondary">Incluir</button>
-                    <button class="btn btn-secondary">Visualizar</button>
-                    <button class="btn btn-secondary">Alterar</button>
+                <div class="d-flex"> 
+                    <button class="btn btn-secondary" onclick="redirecionarParaEntidade('vendedor')">Incluir</button>
+                    <button class="btn btn-secondary" onclick="visualizarVendedor()">Visualizar</button>
+                    <button class="btn btn-secondary" onclick="AlterarVendedor()">Alterar</button>
                     <button class="btn btn-secondary">Excluir</button>
                 </div>
                 <div class="dropdown_filter d-flex align-items-center">
@@ -87,7 +87,7 @@
                             <th>Filial</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="vendedoresBody">
                         <!-- Conteúdo do Grid -->
                     </tbody>
                 </table>
@@ -95,6 +95,8 @@
         </div>
     </div>
     <script src="../../JS/Compartilhados.js"></script>
+    <script src="../../JS/Index.js"></script>
+    <script src="../../JS/Vendedores/Vendedor_Table.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

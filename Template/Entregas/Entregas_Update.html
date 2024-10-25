@@ -10,10 +10,9 @@
 <body>
     <div class="container-fluid">
         <header class="header">
-            <h1>Entregas Incluir</h1>
+            <h1>Alterar Entrega</h1>
             <div>
-                <button class="btn btn-secondary">Fechar</button>
-                <button class="btn btn-secondary">Confirmar</button>
+                <button class="btn btn-secondary" onclick="fecharEntregas()">Fechar</button>
             </div>
         </header>
         <nav>
@@ -80,8 +79,8 @@
                             <input type="text" class="form-control" id="tipo-entrega" placeholder="Tipo de Entrega">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="farmacia">Farmácia</label>
-                            <input type="text" class="form-control" id="farmacia" placeholder="Farmácia">
+                            <label for="filial">Filial</label>
+                            <input type="text" class="form-control" id="filial" placeholder="filial">
                         </div>
                     </div>
                 </form>
@@ -94,12 +93,22 @@
                             <input type="text" class="form-control" id="nome-entregador" placeholder="Nome Entregador">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="data-entrega">Data Entrega</label>
-                            <input type="date" class="form-control" id="data-entrega">
+                            <label for="data-inicio">Data Início</label>
+                            <input type="date" class="form-control" id="data-inicio">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="hora-entrega">Hora Entrega</label>
-                            <input type="time" class="form-control" id="hora-entrega">
+                            <label for="inicio-entrega">Início Entrega</label>
+                            <input type="time" class="form-control" id="inicio-entrega">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="latitude">Latitude</label>
+                            <input type="text" class="form-control" id="latitude" placeholder="latitude">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="longitude">Longitude</label>
+                            <input type="text" class="form-control" id="longitude" placeholder="longitude">
                         </div>
                     </div>
                     <div class="form-row">
@@ -114,12 +123,12 @@
                             <input type="text" class="form-control" id="status" placeholder="Status">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inicio-entrega">Início Entrega</label>
-                            <input type="time" class="form-control" id="inicio-entrega">
+                            <label for="data-entrega">Data Entrega</label>
+                            <input type="date" class="form-control" id="data-entrega">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="data-inicio">Data Início</label>
-                            <input type="date" class="form-control" id="data-inicio">
+                            <label for="hora-entrega">Hora Entrega</label>
+                            <input type="time" class="form-control" id="hora-entrega">
                         </div>
                     </div>
                 </form>
@@ -136,15 +145,16 @@
                             <input type="time" class="form-control" id="hora-assinatura">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="caixa-assinatura">Caixa Assinatura</label>
-                            <input type="text" class="form-control" id="caixa-assinatura" placeholder="Caixa Assinatura">
+                            <label for="vendedor-assinatura">Vendedor Assinatura</label>
+                            <input type="text" class="form-control" id="vendedor-assinatura" placeholder="Vendedor Assinatura">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../../JS/Compartilhados.js"></script>
+    <script src="../../JS/Index.js"></script>
+    <script src="../../JS/Entregas/Entregas_Update.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

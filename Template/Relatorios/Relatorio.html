@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entregas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Estilos/Cadastros.css">
+    <style>
+        /* Alteração da cor da seção do título */
+        .card-header-custom {
+            background-color: rgb(64, 166, 152);
+            color: white;
+        }
+        /* Alteração da cor do botão Confirmar */
+        .btn-confirm-custom {
+            background-color: rgb(64, 166, 152);
+            color: white;
+        }
+        .btn-confirm-custom:hover {
+            background-color: rgb(52, 145, 133); /* Efeito hover para o botão */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper d-flex"></div>    
+        <!--Menu Lateral-->
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="../../Static/Logo2.jpg" alt="">
+            </div>
+            <div class="folder">Atualizações</div>
+            <div class="sub-menu">
+                <a href="Entregas.html">Entregas</a>
+                <a href="../Entregas_Avulsas/Entregas_Avulsas.html">Entregas Avulsas</a>
+                <a href="../Entregadores/Entregador.html">Cadastro de Entregador</a>
+                <a href="../Vendedores/Vendedor.html">Cadastro de Vendedor</a>
+                <a href="#">Cadastro de Empresa</a>
+            </div>
+            <div class="folder">Relatórios</div>
+            <div class="sub-menu">
+                <a href="#">Entregas Analítico</a>
+                <a href="../Relatorios/Relatorio_Analitico.html">Entregas Analítico</a>
+                <a href="../Relatorios/Relatorio.html">Entregas Sintético</a>
+            </div>
+            <div class="folder">Miscelânea</div>
+            <div class="sub-menu">
+                <a href="#">Localizar Entregador</a>
+                <a href="#">Sobre nós</a>
+                <a href="#">Versão do Software</a>
+            </div>
+        </div>
+
+        <!-- Botão de alternância para a sidebar -->
+        <span class="menu-toggle" id="menuToggle">&#9776;</span>
+
+        <!-- FIM DO Menu Lateral-->
+        <div class="container-fluid sidebar-expanded">
+            <header class="header">
+                <h1>RELATORIO SINTETICO DE ENTREGAS</h1>
+                <div class="user-info">
+                    <p id="welcome">Seja bem-vindo: Fulano</p>
+                    <p id="dateTime"> teste</p> <!-- Data e Hora irão aqui -->
+                </div>
+            </header>
+
+            <!-- Parâmetros do Relatório -->
+            <section class="parametros-relatorio mt-5">
+                <div class="card">
+                    <div class="card-header card-header-custom">
+                        <h5 class="mb-0">Parâmetros do Relatório</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="parametrosForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="dataInicio" class="form-label">Data Início</label>
+                                    <input type="date" class="form-control" id="dataInicio" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="dataFim" class="form-label">Data Fim</label>
+                                    <input type="date" class="form-control" id="dataFim" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="entregadoresSelect" class="form-label">Entregadores</label>
+                                <select class="form-select" id="entregadoresSelect">
+                                    <option value="0">Todos</option>
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" onclick="cancelarRelatorio()">Cancelar</button>
+                                <button type="button" class="btn btn-confirm-custom" onclick="confirmarRelatorio()">Confirmar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    <script src="../../JS/Compartilhados.js"></script>
+    <script src="../../JS/Index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
