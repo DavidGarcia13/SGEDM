@@ -1,8 +1,7 @@
 // Função para salvar dados no localStorage com tempo de expiração
-async function saveTokenToLocalStorage(data, usuario) {
+function saveTokenToLocalStorage(data, usuario, auser) {
     const now = new Date();
     const expirationTime = now.getTime() + 12 * 60 * 60 * 1000; // 12 horas em milissegundos
-    const auser = await getVendedor(data.idUser, data.token)
 
     const authData = {
         token: data.token,
@@ -57,7 +56,7 @@ function getIdNomeUser(opc) {
 
  async function getToken(username, password) {
     const url = `${urlBackend()}/api/v1/auth`;
-
+    
     const opcoes = {
         method: 'POST',
         headers: {
@@ -76,10 +75,12 @@ function getIdNomeUser(opc) {
         if (!response.ok) {
             throw new Error('Erro na requisição: ' + response.status);
         }
-
+        
+        
         const data = await response.json();
         console.log('Token:', data.token);
-        saveTokenToLocalStorage(data, username)
+        const auser = await getVendedor(data.idUser, data.token)
+        saveTokenToLocalStorage(data, username,auser)
         window.location.href = '../Template/Entregas/Entregas.html'; 
         
     } catch (e) {
