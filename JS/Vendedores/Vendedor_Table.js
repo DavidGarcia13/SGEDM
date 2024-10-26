@@ -69,6 +69,7 @@ async function populateTable() {
 
         tableBody.appendChild(row);
     });
+    selecionarPrimeiraLinha('vendedoresBody');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -119,4 +120,86 @@ async function AlterarVendedor() {
     window.location.href = `Vendedor_Update.html?id=${vendedorId}`;
 }
 
+//-------------------------------------------------------FILTROS-------------------------------------------------------
 
+function configureCheckboxes() {
+    const checkboxes = document.querySelectorAll('.filter-checkbox');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                checkboxes.forEach(otherCheckbox => {
+                    if (otherCheckbox !== this) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+            }
+        });
+    });
+}
+
+document.getElementById('dropdownFilterButton').addEventListener('click', function() {
+    configureCheckboxes(); // Chama a função para configurar os checkboxes
+});
+
+
+document.getElementById('Inputfind').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        filtrarTabela();
+    }
+});
+
+function filtrarTabela() {
+    const valorInput = document.getElementById('Inputfind').value.toLowerCase();
+    const filtros = document.querySelectorAll('.filter-checkbox:checked');
+    const tabela = document.getElementById('vendedoresBody');
+    const linhas = tabela.getElementsByTagName('tr');
+
+    if (filtros.length === 0 || !valorInput) {
+        showAlert('Selecione ao menos um filtro e preencha o campo de busca.');
+        //alert('Selecione ao menos um filtro e preencha o campo de busca.');
+        return;
+    }
+
+    for (let i = 0; i < linhas.length; i++) {
+        let mostrarLinha = false;
+
+        filtros.forEach(filtro => {
+            const filtroId = filtro.id;
+            let colunaIndex = -1;
+
+            switch (filtroId) {
+                case 'nome':
+                    colunaIndex = 2;
+                    break;
+                case 'codigo':
+                    colunaIndex = 1;
+                    break;
+            }
+
+            if (colunaIndex > -1) {
+                const conteudoColuna = linhas[i].getElementsByTagName('td')[colunaIndex].textContent.toLowerCase();
+                if (conteudoColuna.includes(valorInput)) {
+                    mostrarLinha = true;
+                }
+            }
+        });
+
+        linhas[i].style.display = mostrarLinha ? '' : 'none';
+    }
+}
+
+document.getElementById('Inputfind').addEventListener('input', function() {
+    if (this.value === '') {
+        removerFiltros();
+    }
+});
+
+function removerFiltros() {
+    const tabela = document.getElementById('vendedoresBody');
+    const linhas = tabela.getElementsByTagName('tr');
+
+    for (let i = 0; i < linhas.length; i++) {
+        linhas[i].style.display = ''; // Mostra todas as linhas
+    }
+}

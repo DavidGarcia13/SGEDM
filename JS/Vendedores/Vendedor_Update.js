@@ -24,7 +24,7 @@ async function carregarVendedor() {
             //document.getElementById('codigo').value = data.id.toString().padStart(6, '0');
             document.getElementById('nome').value = data.nome;
             //document.getElementById('cpf').value = data.cpf;
-            //document.getElementById('turno').value = data.turno;
+            document.getElementById('turno').value = data.turno;
             //document.getElementById('filial').value = await GetEmpresas(data.idMatriz);
             document.getElementById('usuario').value = data.username;
             document.getElementById('senha').value = '********';

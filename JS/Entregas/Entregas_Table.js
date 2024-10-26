@@ -1,12 +1,3 @@
-function selecionarPrimeiraLinha() {
-    const tabela = document.querySelector('#entregasBody');
-    const primeiraLinha = tabela.querySelector('tr');
-    
-    if (primeiraLinha) {
-        primeiraLinha.classList.add('selected');
-    }
-}
-
 function configureCheckboxes() {
     const checkboxes = document.querySelectorAll('.filter-checkbox');
 
@@ -149,7 +140,7 @@ async function populateTableEntregas() {
             // Adiciona a linha ao body da tabela
             tabelaBody.appendChild(row);
         });
-        selecionarPrimeiraLinha()
+        selecionarPrimeiraLinha('entregasBody')
 
     } catch (error) {
         console.error('Erro ao popular a tabela de entregas:', error);
@@ -160,7 +151,8 @@ async function visualizarEntrega() {
     // Obter a linha selecionada na tabela
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma linha para visualizar.');
+        showAlert('Por favor, selecione uma linha para visualizar.');
+        //alert('Por favor, selecione uma linha para visualizar.');
         return;
     }
     let entregaId = selectedRow.cells[1].textContent;  // Considerando que a segunda célula é o código (ID)
@@ -174,14 +166,16 @@ document.getElementById('abrirmaps').addEventListener('click', openModal)
 function openModal(){
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma entrega para visualizar.');
+        showAlert('Por favor, selecione uma entrega para visualizar.');
+        //alert('Por favor, selecione uma entrega para visualizar.');
         return;
     }
     let status = selectedRow.cells[0].textContent;
     if (status === 'Finalizada') {
         $('#googleMapsModal').modal('show');
     }else{
-        alert('Apenas entregas finalizadas contemplam coordenadas geograficas');
+        showAlert('Apenas entregas finalizadas contemplam coordenadas geograficas');
+        //alert('Apenas entregas finalizadas contemplam coordenadas geograficas');
     }
 } 
 
@@ -193,13 +187,15 @@ function openGoogleMaps(latitude, longitude) {
 function getIdEntrega(){
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma linha para visualizar.');
+        showAlert('Por favor, selecione uma linha para visualizar.');
+        //alert('Por favor, selecione uma linha para visualizar.');
         return;
     }
     let idEntrega = selectedRow.cells[1].textContent;
     
     if (!idEntrega) {
-        alert('ID da Entrega não foi fornecido.');
+        showAlert('ID da Entrega não foi fornecido.');
+        //alert('ID da Entrega não foi fornecido.');
         return;
     }else{
         return idEntrega;
@@ -226,15 +222,17 @@ async function getCordenadas() {
             const longitude = data.body.longitude || '';
             
             openGoogleMaps(latitude, longitude)
-            fecharEntregas()
+              voltarPrincipal('Entregas')
 
         } else {
             console.error('Erro ao buscar entrega:', response.statusText);
-            alert('Erro ao buscar entrega: ' + response.statusText);
+            showAlert('Erro ao buscar entrega: ' + response.statusText);
+            //alert('Erro ao buscar entrega: ' + response.statusText);
         }
     } catch (error) {
         console.error('Erro de conexão:', error);
-        alert('Erro de conexão: ' + error.message);
+        showAlert('Erro de conexão: ' + error.message);
+        //alert('Erro de conexão: ' + error.message);
     }
 }
 
@@ -302,14 +300,16 @@ document.getElementById('atribuirent').addEventListener('click', modalAtribuirEn
 function modalAtribuirEnt(){
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma entrega para visualizar.');
+        showAlert('Por favor, selecione uma entrega para visualizar.');
+        //alert('Por favor, selecione uma entrega para visualizar.');
         return;
     }
     let status = selectedRow.cells[0].textContent;
     if (status === 'Aberta') {
         $('#atribuirentregador').modal('show');
     }else{
-        alert('Apenas entregas em aberto podem ser atribuidas');
+        showAlert('Apenas entregas em aberto podem ser atribuidas');
+        //alert('Apenas entregas em aberto podem ser atribuidas');
     }
 } 
 
@@ -322,7 +322,8 @@ async function atribuirEntregador() {
 
     // Verifica se um entregador foi selecionado
     if (idEntregador === "") {
-        alert("Por favor, selecione um entregador.");
+        showAlert('Por favor, selecione um entregador.');
+        //alert("Por favor, selecione um entregador.");
         return;
     }
     
@@ -362,7 +363,7 @@ document.getElementById("confirmar-entregador").addEventListener("click", atribu
 //----------------------------------------------Finalizar Entrega-------------------------------------------------------------------------\\
 
 async function finalizarEntrega() {
-    const selectStatusEntrega = document.getElementById("select-status-entrega");
+    let selectStatusEntrega = document.getElementById("select-status-entrega");
     let idEntrega = getIdEntrega();
     let token = getTokenFromLocalStorage();
 
@@ -372,14 +373,21 @@ async function finalizarEntrega() {
         return;
     }
 
-    const statusEntrega = selectStatusEntrega.value;
+    let statusEntrega = selectStatusEntrega.value;
 
     if (statusEntrega === "") {
-        alert("Por favor, selecione o status da entrega.");
+        showAlert('Por favor, selecione o status da entrega.');
+        //alert("Por favor, selecione o status da entrega.");
         return;
+    }else{
+        if(statusEntrega === "entregue"){
+            statusEntrega = "FINALIZADA_MANUAL"
+        }else{
+             statusEntrega = "NAO_ENTREGUE"
+        }
     }
  
-    const url = `${urlBackend()}/api/v1/entrega/finalizar/${parseInt(idEntrega)}`;
+    const url = `${urlBackend()}/api/v1/entrega/finalizar/${parseInt(idEntrega)}/${statusEntrega}`;
 
     const opcoes = {
         method: 'PUT',
@@ -411,14 +419,16 @@ document.getElementById('finentrega').addEventListener('click', modalFinalizaEnt
 function modalFinalizaEnt(){
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma entrega para visualizar.');
+        showAlert('Por favor, selecione uma entrega para visualizar.');
+        //alert('Por favor, selecione uma entrega para visualizar.');
         return;
     }
     let status = selectedRow.cells[0].textContent;
     if (status === 'Em rota') {
         $('#finalizarEntregaModal').modal('show');
     }else{
-        alert('Apenas entregas atribuidas podem ser finalizadas');
+        showAlert('Apenas entregas atribuidas podem ser finalizadas');
+        //alert('Apenas entregas atribuidas podem ser finalizadas');
     }
 } 
 
@@ -429,14 +439,16 @@ document.getElementById('assentrega').addEventListener('click', modalAssinaEnt)
 function modalAssinaEnt(){
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma entrega para visualizar.');
+        showAlert('Por favor, selecione uma entrega para visualizar.');
+        //alert('Por favor, selecione uma entrega para visualizar.');
         return;
     }
     let status = selectedRow.cells[0].textContent;
     if (status === 'Finalizada' || status === 'Finalizada Manualmente') {
         $('#assinaEntregaModal').modal('show');
     } else {
-        alert('Apenas entregas atribuídas podem ser finalizadas');
+        showAlert('Apenas entregas atribuídas podem ser finalizadas');
+        //alert('Apenas entregas atribuídas podem ser finalizadas');
     }
 } 
 
@@ -447,7 +459,8 @@ async function AssinarEntrega() {
 
     // Verifica se um entregador foi selecionado
     if (idVendedor === "") {
-        alert("Usuario não Autenticado!");
+        showAlert('Usuario não Autenticado!');
+        //alert("Usuario não Autenticado!");
         return;
     }
     
@@ -488,14 +501,16 @@ document.getElementById('btnexcluir').addEventListener('click', modalCancelEnt)
 function modalCancelEnt(){
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma entrega para visualizar.');
+        showAlert('Por favor, selecione uma entrega para visualizar.');
+        //alert('Por favor, selecione uma entrega para visualizar.');
         return;
     }
     let status = selectedRow.cells[0].textContent;
     if (status === 'Aberta' || status === 'Em rota') {
         $('#cancelEntregaModal').modal('show');
     } else {
-        alert('Apenas entregas não finalizadas podem ser excluidas');
+        showAlert('Apenas entregas não finalizadas podem ser canceladas.');
+        //alert('Apenas entregas não finalizadas podem ser excluidas');
     }
 } 
 
@@ -545,7 +560,8 @@ function filtrarTabela() {
     const linhas = tabela.getElementsByTagName('tr');
 
     if (filtros.length === 0 || !valorInput) {
-        alert('Selecione ao menos um filtro e preencha o campo de busca.');
+        showAlert('Selecione ao menos um filtro e preencha o campo de busca.');
+        //alert('Selecione ao menos um filtro e preencha o campo de busca.');
         return;
     }
 
@@ -606,7 +622,8 @@ async function AlterarEntrega() {
     // Obter a linha selecionada na tabela
     let selectedRow = document.querySelector('#entregasBody .selected');
     if (!selectedRow) {
-        alert('Por favor, selecione uma linha para visualizar.');
+        showAlert('Por favor, selecione uma linha para visualizar.');
+        //alert('Por favor, selecione uma linha para visualizar.');
         return;
     }
 

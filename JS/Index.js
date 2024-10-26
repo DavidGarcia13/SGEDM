@@ -25,9 +25,11 @@ function getTokenFromLocalStorage() {
         if (now.getTime() < authData.expiration) {
             return authData.token;
         } else {
-            // Remove dados expirados do localStorage
             localStorage.removeItem('authData');
+            window.location.href = '../Template/Index.html'; //apago o Data e Volto para pagina de login
         }
+    }else{
+        window.location.href = '../Index.html' //Volto para pagina de login
     }
     return null;
 }
@@ -95,9 +97,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     try {
         const token = await getToken(username, password);
-        alert('Autenticação realizada com sucesso!');
+        showAlert('Autenticação realizada com sucesso!');
+        //alert('Autenticação realizada com sucesso!');
     } catch (e) {
-        alert('Erro na autenticação: ' + e.message);
+        showAlert('Usuario ou senha invalidos.');
+       
     }
 });
 
@@ -192,15 +196,69 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-function fecharEntregas() {
-    window.location.href = 'Entregas.html';
+
+function voltarPrincipal(entidade) {
+    const url = `${entidade}.html`;
+    window.location.href = url;
 }
 
-function fecharEntregadores() {
-    window.location.href = 'Entregador.html';
-}
 
 //Function de configuração da URL
 function urlBackend(){
     return 'http://165.22.181.136:8080'
+}
+
+//Function para remoção de todos autocomplete dos Inputs:
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.form-check input').forEach(input => {
+        input.setAttribute('autocomplete', 'off');
+    });
+});
+
+function showAlert(message) {
+    // Verifica se o modal já existe; se existir, remove-o para evitar duplicação
+    const existingModal = document.getElementById("alertModal");
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Cria o HTML do modal com a mensagem passada como parâmetro
+    const modalHTML = `
+        <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="alertModalLabel">Atenção</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <div class="modal-body" id="alertMessage">
+                                    ${message}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="closeAlertModal">OK</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Adiciona o modal ao corpo do documento
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    // Inicializa o modal e o exibe
+    const alertModal = new bootstrap.Modal(document.getElementById("alertModal"));
+    alertModal.show();
+
+    // Adiciona um listener ao botão "OK" para fechar o modal
+    document.getElementById("closeAlertModal").addEventListener("click", function () {
+        alertModal.hide(); // Fecha o modal
+    });
 }

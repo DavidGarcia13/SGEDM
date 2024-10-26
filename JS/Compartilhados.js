@@ -51,3 +51,11 @@ function updateUserName() {
     welcomeMessage.textContent = `Seja bem-vindo: ${userName}`;
 }
 
+function selecionarPrimeiraLinha(nometab) {
+    const tabela = document.querySelector(`#${nometab}`);
+    const primeiraLinha = tabela.querySelector('tr');
+    
+    if (primeiraLinha) {
+        primeiraLinha.classList.add('selected');
+    }
+}

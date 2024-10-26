@@ -31,7 +31,7 @@
             </div>
             <div class="folder">Atualizações</div>
             <div class="sub-menu">
-                <a href="Entregas.html">Entregas</a>
+                <a href="../Entregas/Entregas.html">Entregas</a>
                 <a href="../Entregas_Avulsas/Entregas_Avulsas.html">Entregas Avulsas</a>
                 <a href="../Entregadores/Entregador.html">Cadastro de Entregador</a>
                 <a href="../Vendedores/Vendedor.html">Cadastro de Vendedor</a>
@@ -39,14 +39,14 @@
             </div>
             <div class="folder">Relatórios</div>
             <div class="sub-menu">
-                <a href="#">Entregas Analítico</a>
                 <a href="../Relatorios/Relatorio_Analitico.html">Entregas Analítico</a>
                 <a href="../Relatorios/Relatorio.html">Entregas Sintético</a>
+                <a href="#">Entregas Avulsas</a>
             </div>
             <div class="folder">Miscelânea</div>
             <div class="sub-menu">
                 <a href="#">Localizar Entregador</a>
-                <a href="#">Sobre nós</a>
+                <a href="../Miscelanea/sobrenos.html">Sobre nós</a>
                 <a href="#">Versão do Software</a>
             </div>
         </div>
@@ -82,15 +82,31 @@
                                     <input type="date" class="form-control" id="dataFim" required>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="entregadoresSelect" class="form-label">Entregadores</label>
-                                <select class="form-select" id="entregadoresSelect">
-                                    <option value="0">Todos</option>
-                                </select>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="entregadoresSelect" class="form-label">Entregadores:</label>
+                                    <select class="form-select" id="entregadoresSelect">
+                                        <option value="0">Todos</option>
+                                        <!-- Opções preenchidas pela função getEntregadores() -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="statusSelect" class="form-label">Status da Entrega: </label>
+                                    <select class="form-select" id="statusSelect">
+                                        <option value="Todas">Todas</option>
+                                        <!--option value="ABERTA">ABERTA</option-->
+                                        <!--option value="EM_ROTA">EM_ROTA</option-->
+                                        <!--option value="CANCELADA">CANCELADA</option-->
+                                        <!--option value="FINALIZADA">FINALIZADA</option-->
+                                        <!--option value="FINALIZADA_MANUA">FINALIZADA_MANUAL</option-->
+                                        <!--option value="FINALIZADA_ASSINADA">FINALIZADA_ASSINADA</option-->
+                                        <!--option value="FINALIZADA_ASSINADA">NAO_ENTREGUE</option-->
+                                    </select>
+                                </div>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="button" class="btn btn-secondary" onclick="cancelarRelatorio()">Cancelar</button>
-                                <button type="button" class="btn btn-confirm-custom" onclick="confirmarRelatorio()">Confirmar</button>
+                                <button type="button" class="btn btn-confirm-custom" onclick="obterRelatorio()">Confirmar</button>
                             </div>
                         </form>
                     </div>
@@ -100,6 +116,8 @@
 
     <script src="../../JS/Compartilhados.js"></script>
     <script src="../../JS/Index.js"></script>
+    <script src="../../JS/Relatorios/Relatorio_Sintetico.js"></script>
+    <script src="../../JS/Entregadores/Entregador_Table.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

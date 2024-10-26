@@ -26,12 +26,12 @@
             <div class="sub-menu">
                 <a href="../Relatorios/Relatorio_Analitico.html">Entregas Analítico</a>
                 <a href="../Relatorios/Relatorio.html">Entregas Sintético</a>
-                <a href="#">Entregas Avulsas</a>
+                <a href="../Relatorios/Relatorio_Avulsas.html">Entregas Avulsas</a>
             </div>
             <div class="folder">Miscelânea</div>
             <div class="sub-menu">
                 <a href="#">Localizar Entregador</a>
-                <a href="#">Sobre nós</a>
+                <a href="../Miscelanea/sobrenos.html">Sobre nós</a>
                 <a href="#">Versão do Software</a>
             </div>
         </div>
@@ -53,7 +53,7 @@
                     <button class="btn btn-secondary" onclick="redirecionarParaEntidade('entregas')">Incluir</button>
                     <button class="btn btn-secondary" onclick="visualizarEntrega()">Visualizar</button>
                     <button class="btn btn-secondary" onclick="AlterarEntrega()">Alterar</button>
-                    <button class="btn btn-secondary" id="btnexcluir">Excluir</button>
+                    <button class="btn btn-secondary" id="btnexcluir">Cancelar</button>
                     <div class="dropdown_actions">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             Outras Ações
@@ -136,7 +136,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="googleMapsModalLabel">Confirmação</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar " onclick="voltarPrincipal('Entregas')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -145,7 +145,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btn-sim" onclick="getCordenadas()">Sim</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="voltarPrincipal('Entregas')">Não</button>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="atribuirentregadormodal">Atribuir Entregador</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" onclick="voltarPrincipal('Entregas')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -173,7 +173,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="voltarPrincipal('Entregas')">Voltar</button>
                     <button type="button" class="btn btn-primary" id="confirmar-entregador">Confirmar</button>
                 </div>
             </div>
@@ -186,7 +186,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="finalizarEntregaModalLabel">Finalização Manual da Entrega</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" onclick="voltarPrincipal('Entregas')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -204,7 +204,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btn-sim" onclick="finalizarEntrega()">Sim</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="voltarPrincipal('Entregas')">Não</button>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="assinaEntregaModalLabel"> Assinatura da Entrega</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" onclick="voltarPrincipal('Entregas')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -226,7 +226,7 @@
                             <label for="select-status-entrega">Confirma Assinatura da entrega?</label>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" id="btn-sim" onclick="AssinarEntrega()">Sim</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="voltarPrincipal('Entregas')">Não</button>
                             </div>
                         </div>
                     </form>
@@ -241,7 +241,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="cancelEntregaModalLabel"> Cancelamento da Entrega</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" onclick="voltarPrincipal('Entregas')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -251,7 +251,7 @@
                             <label for="select-status-entrega">Confirma o cancelamento da entrega?</label>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" id="btn-sim" onclick="CancelarEntrega()">Sim</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fecharEntregas()">Não</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="voltarPrincipal('Entregas')">Não</button>
                             </div>
                         </div>
                     </form>
@@ -259,6 +259,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="../../JS/Compartilhados.js"></script>
     <script src="../../JS/Index.js"></script>
