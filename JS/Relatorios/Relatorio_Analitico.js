@@ -24,7 +24,7 @@ async function obterRelatorio() {
         
         //Verifico Status Entrega:
         if (statussel !== 'Todas') {
-            url = `${url}/${statussel}`;
+            url = `${url}?statusEntrega=${statussel}`;
         }
         
         // Verifica se um entregador foi selecionado
