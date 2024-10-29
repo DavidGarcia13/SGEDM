@@ -25,10 +25,10 @@ function getTokenFromLocalStorage() {
             return authData.token;
         } else {
             localStorage.removeItem('authData');
-            window.location.href = '../Template/Index.html'; //apago o Data e Volto para pagina de login
+            window.location.href = 'Template/Index.html'; //apago o Data e Volto para pagina de login
         }
     }else{
-        window.location.href = '../Index.html' //Volto para pagina de login
+        window.location.href = '../Template/Index.html' //Volto para pagina de login
     }
     return null;
 }
@@ -81,7 +81,7 @@ function getIdNomeUser(opc) {
         console.log('Token:', data.token);
         const auser = await getVendedor(data.idUser, data.token)
         saveTokenToLocalStorage(data, username,auser)
-        window.location.href = '../Template/Entregas/Entregas.html'; 
+        window.location.href = 'Template/Entregas/Entregas.html'; 
         
     } catch (e) {
         console.log('Deu erro: ' + e.message);
