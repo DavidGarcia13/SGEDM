@@ -7,7 +7,7 @@ async function carregarEntregador() {
     if (!entregadorId) {
         alert('ID do entregador não foi fornecido.');
         return;
-    }
+    } 
 
     try {
         // Fazer o fetch para a API com o ID do entregador

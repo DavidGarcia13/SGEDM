@@ -12,7 +12,7 @@ async function carregarEntregas() {
         return;
     }
 
-    try {
+    try { 
         // Fazer o fetch para a API com o ID do entregador
         const response = await fetch(`${urlBackend()}/api/v1/entrega?idEntrega=${idEntrega}`, {
             method: 'GET',
