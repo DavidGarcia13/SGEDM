@@ -206,7 +206,7 @@ function voltarPrincipal(entidade) {
 
 //Function de configuração da URL
 function urlBackend(){
-    return 'http://165.22.181.136:8080'
+    return 'https://dmsolucoes.tech'
 }
 
 //Function para remoção de todos autocomplete dos Inputs:
