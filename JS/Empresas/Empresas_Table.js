@@ -1,42 +1,42 @@
 // Função para popular a tabela no HTML
 async function populateTableEmp() {
-    const entregadores = await getEntregadores();
+    const empresas = await GetEmpresas(); 
 
-    const tableBody = document.getElementById('entregadoresBody');
+    const tableBody = document.getElementById('empresasBody');
 
     // Limpa o conteúdo existente
     tableBody.innerHTML = '';
 
-    entregadores.forEach(entregador => {
+    empresas.forEach(empresa => {
         const row = document.createElement('tr');
 
-        // Coluna Status (baseado no campo "ativo")
-        const statusCell = document.createElement('td');
-        statusCell.textContent = entregador.ativo ? 'Ativo' : 'Inativo';
-        row.appendChild(statusCell);
-
-        // Coluna Código (baseado no campo "idEntregador")
+        // Coluna Código (baseado no campo "idempresa")
         const codigoCell = document.createElement('td');
-        codigoCell.textContent = entregador.idEntregador.toString().padStart(6, '0');
+        codigoCell.textContent = empresa.idMatriz.toString().padStart(6, '0');
         row.appendChild(codigoCell);
 
-        // Coluna Nome do Entregador (baseado no campo "nome")
+        // Coluna Nome do empresa (baseado no campo "nome")
         const nomeCell = document.createElement('td');
-        nomeCell.textContent = entregador.nome;
+        nomeCell.textContent = empresa.nome;
         row.appendChild(nomeCell);
 
-        const filialCell = document.createElement('td');
-        filialCell.textContent = entregador.nomeMatriz; // Adapte conforme necessário
-        row.appendChild(filialCell);
+        const CnpjCell = document.createElement('td');
+        CnpjCell.textContent = empresa.cnpj; // Adapte conforme necessário
+        row.appendChild(CnpjCell);
+
+        const logrador = document.createElement('td');
+        logrador.textContent = empresa.logradouro; // Adapte conforme necessário
+        row.appendChild(logrador);
+
 
         // Adiciona a linha à tabela
         tableBody.appendChild(row);
     });
-    selecionarPrimeiraLinha('entregadoresBody');
+    selecionarPrimeiraLinha('empresasBody');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const tableBody = document.getElementById('entregadoresBody');
+    const tableBody = document.getElementById('empresasBody');
 
     tableBody.addEventListener('click', function(event) {
         const selectedRow = event.target.closest('tr'); // Seleciona a linha clicada
@@ -55,32 +55,32 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Executa a função populateTable ao carregar a página
-document.addEventListener('DOMContentLoaded', populateTable);
+document.addEventListener('DOMContentLoaded', populateTableEmp);
 
-async function visualizarEntregador() {
+async function visualizarEmpresa() {
     // Obter a linha selecionada na tabela
-    let selectedRow = document.querySelector('#entregadoresBody .selected');
+    let selectedRow = document.querySelector('#empresasBody .selected');
     if (!selectedRow) {
         alert('Por favor, selecione uma linha para visualizar.');
         return;
     }
 
-    // Obter o ID do entregador na coluna "Código"
-    let entregadorId = selectedRow.cells[1].textContent;  // Considerando que a segunda célula é o código (ID)
-    window.location.href = `Entregador_View.html?id=${entregadorId}`;
+    // Obter o ID do empresa na coluna "Código"
+    let empresaId = selectedRow.cells[1].textContent;  // Considerando que a segunda célula é o código (ID)
+    window.location.href = `Empresa_View.html?id=${empresaId}`;
 }
 
-async function AlterarEntregador() {
+async function AlterarEmpresa() {
     // Obter a linha selecionada na tabela
-    let selectedRow = document.querySelector('#entregadoresBody .selected');
+    let selectedRow = document.querySelector('#empresasBody .selected');
     if (!selectedRow) {
         alert('Por favor, selecione uma linha para visualizar.');
         return;
     }
 
-    // Obter o ID do entregador na coluna "Código"
-    let entregadorId = selectedRow.cells[1].textContent;  // Considerando que a segunda célula é o código (ID)
-    window.location.href = `Entregador_Update.html?id=${entregadorId}`;
+    // Obter o ID do empresa na coluna "Código"
+    let empresaId = selectedRow.cells[1].textContent;  // Considerando que a segunda célula é o código (ID)
+    window.location.href = `Empresa_Update.html?id=${empresaId}`;
 }
 
 
@@ -116,7 +116,7 @@ document.getElementById('Inputfind').addEventListener('keydown', function(event)
 function filtrarTabela() {
     const valorInput = document.getElementById('Inputfind').value.toLowerCase();
     const filtros = document.querySelectorAll('.filter-checkbox:checked');
-    const tabela = document.getElementById('entregadoresBody');
+    const tabela = document.getElementById('empresasBody');
     const linhas = tabela.getElementsByTagName('tr');
 
     if (filtros.length === 0 || !valorInput) {
@@ -134,10 +134,10 @@ function filtrarTabela() {
 
             switch (filtroId) {
                 case 'nome':
-                    colunaIndex = 2;
+                    colunaIndex = 1;
                     break;
                 case 'codigo':
-                    colunaIndex = 1;
+                    colunaIndex = 0;
                     break;
             }
 
@@ -160,7 +160,7 @@ document.getElementById('Inputfind').addEventListener('input', function() {
 });
 
 function removerFiltros() {
-    const tabela = document.getElementById('entregadoresBody');
+    const tabela = document.getElementById('empresasBody');
     const linhas = tabela.getElementsByTagName('tr');
 
     for (let i = 0; i < linhas.length; i++) {

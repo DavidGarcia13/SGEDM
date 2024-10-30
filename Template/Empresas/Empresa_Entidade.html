@@ -3,79 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Entregadores</title>
+    <title>Cadastro de Empresas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../Estilos/Entidades.css">
 </head>
 <body>
     <div class="container-fluid">
         <header class="header">
-            <h1>ENTREGADOR INCLUIR</h1>
+            <h1>Cadastro de Empresas</h1>
             <div>
-                <button class="btn btn-secondary" onclick="voltarPrincipal('Entregador')">Fechar</button>
-                <button  onclick="cadastrarEntregador()" class="btn btn-secondary">Confirmar</button>
+                <button class="btn btn-secondary" onclick="voltarPrincipal('Empresa')">Fechar</button>
+                <button onclick="cadastrarEmpresa()" class="btn btn-secondary">Confirmar</button>
             </div>
         </header>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-dados-entrega" role="tabpanel">
+            <div class="tab-pane fade show active" id="nav-dados-empresa" role="tabpanel">
                 <form class="p-3">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nome">Nome</label>
-                            <input type="text" class="form-control" id="nome" placeholder="Nome" oninput="gerarUsuario()">
+                            <label for="nomeEmpresa">Nome da Empresa</label>
+                            <input type="text" class="form-control" id="nomeEmpresa" placeholder="Nome da Empresa">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="cpf">CPF</label>
-                            <input type="text" class="form-control" id="cpf" placeholder="CPF">
+                            <label for="endereco">Endereço</label>
+                            <input type="text" class="form-control" id="endereco" placeholder="Endereço">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="filial">Filial</label>
-                            <select class="form-control" id="filial"></select>
+                            <label for="cnpj">CNPJ</label>
+                            <input type="text" class="form-control" id="cnpj" placeholder="CNPJ">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="turno">Turno</label>
-                            <select class="form-control" id="turno"></select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="usuario">Usuário</label>
-                            <input type="text" class="form-control" id="usuario" placeholder="Usuário">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="senha">Senha</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="senha" placeholder="Senha">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" id="toggle-password">
-                                        <i class="fa fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="telefone">Telefone</label>
                             <input type="text" class="form-control" id="telefone" placeholder="Telefone">
                         </div>
+                    </div>
+
+                    <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="status">Status</label>
-                            <input type="checkbox" id="status">
-                            <span id="status-label" class="status-label">Inativo</span>
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" placeholder="E-mail">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="latitude">Latitude</label>
+                            <input type="text" class="form-control" id="latitude" placeholder="Latitude">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="longitude">Longitude</label>
+                            <input type="text" class="form-control" id="longitude" placeholder="Longitude">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../../JS/index.js"></script>
-    <script src="../../JS/Entregadores/Entregador_Entidade.js"></script>
+    <script src="../../JS/Index.js"></script>
+    <script src="../../JS/Empresas/Empresas_Entidade.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

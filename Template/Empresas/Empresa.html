@@ -18,9 +18,9 @@
             <div class="sub-menu">
                 <a href="../Entregas/Entregas.html">Entregas</a>
                 <a href="../Entregas_Avulsas/Entregas_Avulsas.html">Entregas Avulsas</a>
-                <a href="Entregador.html">Cadastro de Entregador</a>
+                <a href="../Entregadores/Entregador.html">Cadastro de Entregador</a>
                 <a href="../Vendedores/Vendedor.html">Cadastro de Vendedor</a>
-                <a href="#">Cadastro de Empresa</a>
+                <a href="Empresa.html">Cadastro de Empresa</a>
             </div>
             <div class="folder">Relatórios</div>
             <div class="sub-menu">
@@ -50,7 +50,7 @@
             </header>
             <section class="controls d-flex">
                 <div class="d-flex">
-                    <button class="btn btn-secondary" onclick="redirecionarParaEntidade('Entregador')" >Incluir</button>
+                    <button class="btn btn-secondary" onclick="redirecionarParaEntidade('Empresa')" >Incluir</button>
                     <button class="btn btn-secondary" onclick="visualizarEntregador()">Visualizar</button>
                     <button class="btn btn-secondary" onclick="AlterarEntregador()">Alterar</button>
                     <button class="btn btn-secondary">Excluir</button>
@@ -87,15 +87,15 @@
                             <th>Endereço</th> 
                         </tr>
                     </thead>
-                    <tbody id="entregadoresBody">
+                    <tbody id="empresasBody">
                     </tbody>
                 </table>
             </section>
         </div>
     </div>
-    <script src="../../JS/index.js"></script>
+    <script src="../../JS/Index.js"></script>
     <script src="../../JS/Compartilhados.js"></script>
-    
+    <script src="../../JS/Empresas/Empresas_Table.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
