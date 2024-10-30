@@ -171,7 +171,7 @@ function openModal(){
         return;
     }
     let status = selectedRow.cells[0].textContent;
-    if (status === 'Finalizada') {
+    if (status === 'Finalizada' ||  status === 'Finalizada e Assinada') {
         $('#googleMapsModal').modal('show');
     }else{
         showAlert('Apenas entregas finalizadas contemplam coordenadas geograficas');
