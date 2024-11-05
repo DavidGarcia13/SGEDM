@@ -61,7 +61,7 @@ img {
 
 .controls .btn {
     padding: 5px 40px 5px 40px;
-    background-color: #6c757d;
+    background-color: #343a40;
     border-color: #6c757d;
     margin-right: 10px;
     flex-shrink: 1; /* Permite que encolham, mantendo a proporção */

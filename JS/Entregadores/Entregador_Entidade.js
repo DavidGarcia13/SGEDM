@@ -116,3 +116,31 @@ function gerarUsuario() {
     document.getElementById('usuario').value = usuario;
     document.getElementById('usuario').disabled = true;
 }
+
+/*Muda o focu do campo ao Pressionar enter*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('input');
+
+    inputs.forEach((input, index) => {
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const nextInput = inputs[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Definir o status como "Ativo" ao carregar a página
+    const checkbox = document.getElementById('status');
+    checkbox.checked = true;
+    atualizarStatus(); // Chama a função para atualizar o texto e as classes
+
+    // Adiciona o evento para atualizar o status quando houver uma alteração
+    checkbox.addEventListener('change', atualizarStatus);
+});

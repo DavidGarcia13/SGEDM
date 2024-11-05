@@ -22,7 +22,6 @@ async function carregarEntregador() {
 
         if (response.ok) {
             const data = await response.json();
-
             // Preencher os campos do formulário com os dados do entregador
             document.getElementById('codigo').value = data.body.idEntregador.toString().padStart(6, '0');;
             document.getElementById('nome').value = data.body.nome;
@@ -30,7 +29,6 @@ async function carregarEntregador() {
             document.getElementById('turno').value = data.body.turno;
             document.getElementById('filial').value = await GetEmpresas(data.body.idMatriz);
             document.getElementById('usuario').value = data.body.usuario;
-            document.getElementById('senha').value = data.body.senha;
             document.getElementById('telefone').value = data.body.telefone;
 
             // Preencher o status
@@ -46,6 +44,7 @@ async function carregarEntregador() {
             document.getElementById('nome').disabled = true;
             document.getElementById('cpf').disabled = true;
             document.getElementById('usuario').disabled = true;
+            carregarFilialETurno();
         } else {
             console.error('Erro ao buscar entregador:', response.statusText);
             alert('Erro ao buscar entregador: ' + response.statusText);
@@ -63,7 +62,6 @@ async function EnviarUpdate() {
     const formData = {
         turno: document.getElementById('turno').value,
         filial: document.getElementById('filial').value,
-        senha: document.getElementById('senha').value,
         telefone: document.getElementById('telefone').value,
         ativo: document.getElementById('status').checked
     };

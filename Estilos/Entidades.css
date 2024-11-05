@@ -9,13 +9,21 @@ body, html {
     flex-direction: column;
     height: 100%;
 }
-.header {
+.header { 
     padding: 10px;
-    background-color: #f8f9fa;
+    background-color:  #343a40;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+.header h1 { 
+    color: white;
+}
+
+.option-verde .selected {
+    color: rgb(64, 166, 152); /* Verde escuro para o texto */
+}
+
 .tab-content {
     flex: 1;
     overflow-y: auto;
@@ -34,4 +42,20 @@ body, html {
     margin-left: 10px;
     font-weight: bold;
     color: #555;
+}
+
+#nav-dados-entrega{
+    color: #555;
+    border-style:solid;
+    border-color: #030303;
+}
+#nav-assinatura{
+    color: #555;
+    border-style:solid;
+    border-color: #030303;
+}
+#nav-entrega{
+    color: #555;
+    border-style:solid;
+    border-color: #030303;
 }

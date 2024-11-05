@@ -105,13 +105,13 @@ async function populateTableEntregas() {
             documentoCell.textContent = entrega.cupomOrcamento || 'N/A';
 
             const valorVendaCell = document.createElement('td');
-            valorVendaCell.textContent = entrega.valorTotal.toFixed(2);
-
+            valorVendaCell.textContent = (entrega.valorTotal ?? 0).toFixed(2);
+            
             const valorRecebidoCell = document.createElement('td');
-            valorRecebidoCell.textContent = entrega.valorReceber.toFixed(2);
-
+            valorRecebidoCell.textContent = (entrega.valorReceber ?? 0).toFixed(2);
+            
             const valorTrocoCell = document.createElement('td');
-            valorTrocoCell.textContent = entrega.troco.toFixed(2);
+            valorTrocoCell.textContent = (entrega.troco ?? 0).toFixed(2);
 
             const dataCell = document.createElement('td');
             dataCell.textContent = new Date(entrega.dataCadastroEntrega).toLocaleDateString();
