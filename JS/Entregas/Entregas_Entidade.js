@@ -23,7 +23,7 @@ async function initializeForm() {
     horaInput.disabled = true;
 
     // Array de formas de pagamento
-    const formasPagamento = ['Cartão de Crédito', 'Cartão de Débito', 'Dinheiro', 'Pix', 'Crediario'];
+    const formasPagamento = ['Pago','Mães de Goias','BR-Card','Cartão de Crédito', 'Cartão de Débito', 'Dinheiro', 'Pix', 'Crediario'];
     // Converter o input de forma de pagamento para um combobox
     convertToCombobox(formaPagInput, formasPagamento, 'forma-pag');
 

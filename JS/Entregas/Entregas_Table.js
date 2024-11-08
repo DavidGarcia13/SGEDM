@@ -39,14 +39,22 @@ document.getElementById('dropdownFilterButton').addEventListener('click', functi
 });
 
 //Retorna o Array de Entregas
-async function getEntregas() {
+async function getEntregas(ddataini,ddatafim) {
     let token = getTokenFromLocalStorage();
+
+    if (!ddataini || !ddatafim) {
+        alert('Por favor, preencha ambas as datas.');
+        return;
+    }else if(ddataini > ddatafim){
+        alert('A Data inicial não pode ser maior que a data final.');
+        return;
+    } 
     
     if (!token){
         console.log('Não foi possivel obter o Token')
     }
 
-    const url = `${urlBackend()}/api/v1/entrega`;
+    const url = `${urlBackend()}/api/v1/entrega?dataInicio=${ddataini}&dataTermino=${ddatafim}`;
     const opcoes = {
         method: 'GET',
         headers: {
@@ -77,17 +85,44 @@ async function getEntregas() {
     }
 }
 
+function formatarData(data) {
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const dia = String(data.getDate()).padStart(2, '0');
+    const horas = String(data.getHours()).padStart(2, '0');
+    const minutos = String(data.getMinutes()).padStart(2, '0');
+    const segundos = String(data.getSeconds()).padStart(2, '0');
+
+    return `${ano}-${mes}-${dia}T${horas}:${minutos}:${segundos}`;
+}
+
 document.addEventListener('DOMContentLoaded', populateTableEntregas);
+
 
 async function populateTableEntregas() {
     const tabelaBody = document.getElementById('entregasBody');
-    
-    // Limpa o conteúdo da tabela antes de preenchê-la novamente
+    const dataAtual = new Date();
+
+    // Criar data de início, subtraindo 2 dias da data atual e ajustando a hora
+    const dataInicio = new Date(dataAtual);
+    dataInicio.setDate(dataAtual.getDate() - 2);
+    dataInicio.setHours(0, 0, 1);
+
+    // Ajustar a data de fim para o final do dia
+    const dataFim = new Date(dataAtual);
+    dataFim.setHours(23, 59, 59);
+
+    const formatarData = (data) =>
+        data.toISOString().slice(0, 19);
+
+    const ddataini = formatarData(dataInicio);
+    const ddatafim = formatarData(dataFim);
+
     tabelaBody.innerHTML = '';
 
     try {
         // Chama a função para obter os dados das entregas
-        const entregas = await getEntregas();
+        const entregas = await getEntregas(ddataini,ddatafim);
 
         // Itera sobre o array de entregas e cria as linhas da tabela
         entregas.forEach(entrega => {
@@ -460,11 +495,10 @@ async function AssinarEntrega() {
     // Verifica se um entregador foi selecionado
     if (idVendedor === "") {
         showAlert('Usuario não Autenticado!');
-        //alert("Usuario não Autenticado!");
         return;
     }
     
-    const url = `${urlBackend()}/api/v1/entrega/assinar/${parseInt(idEntrega)}`;
+    const url = `${urlBackend()}/api/v1/entrega/assinar/${parseInt(idVendedor)}`;
 
     const opcoes = {
         method: 'PUT',
@@ -472,9 +506,7 @@ async function AssinarEntrega() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({
-            id: parseInt(idVendedor)
-        }),
+        body: `[${parseInt(idEntrega)}]`,
         mode: 'cors',
     };
 

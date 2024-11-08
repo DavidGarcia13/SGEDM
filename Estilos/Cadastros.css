@@ -76,6 +76,10 @@ img {
     padding: 5px 1px 5px 1px;
 }
 
+#inputData {
+    padding: 5px 25px 5px 25px;
+}
+
 .grid-container {
     flex: 1;
     overflow-y: auto;
