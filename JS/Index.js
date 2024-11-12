@@ -263,3 +263,70 @@ function showAlert(message) {
         alertModal.hide(); // Fecha o modal
     });
 }
+
+//-----------------------------------------------------Modal Usuario ----------------------------------------
+
+function showUserModal(userName) {
+    // Verifica se o modal já existe; se existir, remove-o para evitar duplicação
+    const existingModal = document.getElementById("userModal");
+    const usuario = getUserFromLocalStorage();
+
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Obtém o horário de login do Local Storage
+    //const loginTime = localStorage.getItem('loginTime') || 'Horário de login indisponível';
+
+    // Cria o HTML do modal com o conteúdo dinâmico
+    const modalHTML = `
+        <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="userModalLabel">Informações do Usuário</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex align-items-center">
+                            <i class="user-icon me-2">👤</i>
+                            <div>
+                                <strong id="modalUserName">${userName}</strong><br>
+                                <small id="modalLoginTime">Login: ${usuario} </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="okButton" data-bs-dismiss="modal">Ok</button>
+                        <button type="button" class="btn btn-danger" id="logoutButton">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Adiciona o modal ao corpo do documento
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    // Inicializa o modal e o exibe
+    const userModal = new bootstrap.Modal(document.getElementById("userModal"));
+    userModal.show();
+
+    // Adiciona um listener ao botão "Logout" para realizar logout
+    document.getElementById("logoutButton").addEventListener("click", function () {
+        // Adicione aqui a lógica de logout
+        showAlert("Até Mais");
+        localStorage.clear();
+        window.location.href = '../../index.html';
+        userModal.hide(); // Fecha o modal
+    });
+}
+
+
+// Evento para fazer logout
+document.getElementById('logoutButton').onclick = function() {
+    // Adicione a lógica de logout aqui
+    alert("Usuário desconectado");
+    document.getElementById('userModal').style.display = 'none';
+};
+

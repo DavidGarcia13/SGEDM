@@ -12,7 +12,8 @@
         <header class="header">
             <h1>Alterar Entrega</h1>
             <div>
-                <button class="btn btn-secondary" onclick="voltarPrincipal('Entregas')">Fechar</button>
+                <button class="btn btn-secondary" onclick="voltarPrincipal('Entregas')">Cancelar</button>
+                <button onclick="AlterarEntrega()" class="btn btn-secondary" >Confirmar</button>
             </div>
         </header>
         <nav>
@@ -52,11 +53,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="valor">Valor</label>
-                            <input type="number" class="form-control" id="valor" placeholder="Valor">
+                            <input type="number" class="form-control" id="valor" placeholder="Valor" oninput="calculaTroco()">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="valor-recebido">Valor Recebido</label>
-                            <input type="number" class="form-control" id="valor-recebido" placeholder="Valor Recebido">
+                            <input type="number" class="form-control" id="valor-recebido" placeholder="Valor Recebido" oninput="calculaTroco()">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="troco">Troco</label>

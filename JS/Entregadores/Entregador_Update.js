@@ -23,7 +23,7 @@ async function carregarEntregador() {
         if (response.ok) {
             const data = await response.json();
             // Preencher os campos do formulário com os dados do entregador
-            document.getElementById('codigo').value = data.body.idEntregador.toString().padStart(6, '0');;
+            document.getElementById('codigo').value = data.body.idEntregador.toString().padStart(6, '0');
             document.getElementById('nome').value = data.body.nome;
             document.getElementById('cpf').value = data.body.cpf;
             document.getElementById('turno').value = data.body.turno;
@@ -58,10 +58,11 @@ async function carregarEntregador() {
 async function EnviarUpdate() {
     let token = getTokenFromLocalStorage();
     const entregadorId = getQueryParam('id');
+    const filial =  document.getElementById('filial').value;
     // Montar o JSON com os dados do formulário
     const formData = {
         turno: document.getElementById('turno').value,
-        filial: document.getElementById('filial').value,
+        filial: parseInt(filial.substring(0, filial.indexOf('-')), 10),
         telefone: document.getElementById('telefone').value,
         ativo: document.getElementById('status').checked
     };

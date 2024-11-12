@@ -46,9 +46,14 @@ function redirecionarParaEntidade(entidade) {
 }
 
 function updateUserName() {
-    const userName = getIdNomeUser(1);
+    const userName = getIdNomeUser(1); // Função para pegar o nome do usuário
     const welcomeMessage = document.getElementById('welcome');
-    welcomeMessage.textContent = `Seja bem-vindo: ${userName}`;
+    welcomeMessage.innerHTML = `Seja bem-vindo: <a href="#" id="userLink">${userName}</a>`;
+    
+    // Evento para abrir o modal ao clicar no nome de usuário
+    document.getElementById('userLink').onclick = function() {
+        showUserModal(userName);
+    };
 }
 
 function selecionarPrimeiraLinha(nometab) {

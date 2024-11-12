@@ -25,7 +25,7 @@ async function carregarEntregas() {
         if (response.ok) {
             const data = await response.json();
 
-            document.getElementById('codigo').value = data.body.idEntrega || '';
+            document.getElementById('codigo').value =  data.body.idEntrega.toString().padStart(6, '0') || '';
             document.getElementById('nome-vendedor').value = data.body.nomeUser || '';
             document.getElementById('documento').value = data.body.cupomOrcamento || '';
             
